@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.ParkBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.ParkBaseInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aircode" property="aircode" jdbcType="VARCHAR" />
+    <result column="parkpath" property="parkpath" jdbcType="VARCHAR" />
+    <result column="mappath" property="mappath" jdbcType="VARCHAR" />
+    <result column="parkcenter" property="parkcenter" jdbcType="VARCHAR" />
+    <result column="databasename" property="databasename" jdbcType="VARCHAR" />
+    <result column="effective" property="effective" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, aircode, databasename, effective, parkpath, mappath, parkcenter
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from parkbaseinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from parkbaseinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.ParkBaseInfo" >
+    insert into parkbaseinfo (id, aircode, databasename, 
+      effective,parkpath,parkcenter)
+    values (#{id,jdbcType=INTEGER}, #{aircode,jdbcType=VARCHAR}, #{databasename,jdbcType=VARCHAR}, 
+      #{effective,jdbcType=VARCHAR},#{parkpath,jdbcType=VARCHAR},#{parkcenter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.ParkBaseInfo" >
+    insert into parkbaseinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aircode != null" >
+        aircode,
+      </if>
+      <if test="parkpath != null" >
+      parkpath,
+      </if>
+      <if test="parkcenter != null" >
+        parkcenter,
+      </if>
+      <if test="databasename != null" >
+        databasename,
+      </if>
+      <if test="effective != null" >
+        effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aircode != null" >
+        #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="parkcenter != null" >
+        #{parkcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="parkpath != null" >
+        #{parkpath,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="effective != null" >
+        #{effective,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.ParkBaseInfo" >
+    update parkbaseinfo
+    <set >
+      <if test="aircode != null" >
+        aircode = #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="parkpath != null" >
+        parkpath = #{parkpath,jdbcType=VARCHAR},
+      </if>
+      <if test="parkcenter != null" >
+        parkcenter = #{parkcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        databasename = #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="effective != null" >
+        effective = #{effective,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.ParkBaseInfo" >
+    update parkbaseinfo
+    set aircode = #{aircode,jdbcType=VARCHAR},
+      databasename = #{databasename,jdbcType=VARCHAR},
+      parkpath = #{parkpath,jdbcType=VARCHAR},
+      parkcenter = #{parkcenter,jdbcType=VARCHAR},
+      effective = #{effective,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByAircode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from parkbaseinfo
+    where aircode = #{aircode,jdbcType=VARCHAR}
+  </select>
+</mapper>

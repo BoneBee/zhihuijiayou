@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.CarTrajectoryInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.CarTrajectoryInfos" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CARNUM" property="carnum" jdbcType="VARCHAR" />
+    <result column="AIRPORTID" property="airportid" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="DOUBLE" />
+    <result column="LATITUDE" property="latitude" jdbcType="DOUBLE" />
+    <result column="ANGLE" property="angle" jdbcType="DOUBLE" />
+    <result column="ALARMSIGN" property="alarmsign" jdbcType="VARCHAR" />
+    <result column="DRIVERID" property="driverid" jdbcType="VARCHAR" />
+    <result column="DRIVERNAME" property="drivername" jdbcType="VARCHAR" />
+    <result column="isonline" property="isonline" jdbcType="VARCHAR" />
+    <result column="writetime" property="writetime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CARNUM, AIRPORTID, UPDATETIME, LONGITUDE, LATITUDE, ANGLE, ALARMSIGN, DRIVERID, DRIVERNAME,
+    isonline, writetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CAR_TRAJECTORY_INFOS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CAR_TRAJECTORY_INFOS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.CarTrajectoryInfos" >
+    insert into CAR_TRAJECTORY_INFOS (ID, CARNUM, AIRPORTID, 
+      UPDATETIME, LONGITUDE, LATITUDE,
+      ALARMSIGN, DRIVERID, DRIVERNAME, 
+      isonline, writetime)
+    values (#{id,jdbcType=INTEGER}, #{carnum,jdbcType=VARCHAR}, #{airportid,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE},
+      #{alarmsign,jdbcType=VARCHAR}, #{driverid,jdbcType=VARCHAR}, #{drivername,jdbcType=VARCHAR}, 
+      #{isonline,jdbcType=VARCHAR}, #{writetime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.CarTrajectoryInfos" >
+    insert into CAR_TRAJECTORY_INFOS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="carnum != null" >
+        CARNUM,
+      </if>
+      <if test="airportid != null" >
+        AIRPORTID,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="alarmsign != null" >
+        ALARMSIGN,
+      </if>
+      <if test="driverid != null" >
+        DRIVERID,
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME,
+      </if>
+      <if test="isonline != null" >
+        isonline,
+      </if>
+      <if test="writetime != null" >
+        writetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carnum != null" >
+        #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="airportid != null" >
+        #{airportid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmsign != null" >
+        #{alarmsign,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        #{writetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.CarTrajectoryInfos" >
+    update CAR_TRAJECTORY_INFOS
+    <set >
+      <if test="carnum != null" >
+        CARNUM = #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="airportid != null" >
+        AIRPORTID = #{airportid,jdbcType=VARCHAR},
+      </if>
+      <if test="UPDATETIME != null" >
+        UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmsign != null" >
+        ALARMSIGN = #{alarmsign,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        DRIVERID = #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        isonline = #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        writetime = #{writetime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.CarTrajectoryInfos" >
+    update CAR_TRAJECTORY_INFOS
+    set CARNUM = #{carnum,jdbcType=VARCHAR},
+      AIRPORTID = #{airportid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=DOUBLE},
+      LATITUDE = #{latitude,jdbcType=DOUBLE},
+      ALARMSIGN = #{alarmsign,jdbcType=VARCHAR},
+      DRIVERID = #{driverid,jdbcType=VARCHAR},
+      DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      isonline = #{isonline,jdbcType=VARCHAR},
+      writetime = #{writetime,jdbcType=DATE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!--查询条件-->
+  <sql id="carTrajectoryInfos_where">
+    <if test="carnum != null and carnum != ''">
+      and CARNUM = #{carnum}
+    </if>
+    <if test="isonline != null and isonline != ''">
+      and isonline = #{isonline}
+    </if>
+   <!-- <if test="updatetimeb != null and updatetimee != null">
+      and UPDATETIME &gt;= #{updatetimeb} and UPDATETIME &lt;= #{updatetimee}
+    </if>-->
+   <if test="updatetimeb != null and updatetimeb != ''">
+     and UPDATETIME &gt;= #{updatetimeb}
+   </if>
+   <if test="updatetimee != null and updatetimee != ''">
+     and UPDATETIME &lt;= #{updatetimee}
+   </if>
+    <if test="airportid != null and airportid != ''">
+      and AIRPORTID = #{airportid}
+    </if>
+    <if test="alarmsign != null and alarmsign != ''">
+      and ALARMSIGN = #{alarmsign}
+    </if>
+    <if test="drivername != null and drivername != ''">
+      and DRIVERNAME LIKE #{pattern}
+    </if>
+  </sql>
+  <!--条件查询车辆轨迹-->
+  <select id="selectByParms" resultMap="BaseResultMap" >
+    <if test="drivername != null">
+      <bind name="pattern" value="'%' + _parameter.drivername + '%'" />
+    </if>
+    select
+    <include refid="Base_Column_List" />
+    from CAR_TRAJECTORY_INFOS
+   <!-- <trim prefix="where" prefixOverrides="and|or">
+      <include refid="carTrajectoryInfos_where"/>
+    </trim>-->
+    where isonline = '1'
+    <if test="carnum != null and carnum != ''">
+      and CARNUM = #{carnum}
+    </if>
+    <if test="updatetimeb != null and updatetimeb != ''">
+      and UPDATETIME &gt;= #{updatetimeb}
+    </if>
+    <if test="updatetimee != null and updatetimee != ''">
+      and UPDATETIME &lt;= #{updatetimee}
+    </if>
+    <if test="drivername != null and drivername != ''">
+      and DRIVERNAME LIKE #{pattern}
+    </if>
+    and LATITUDE BETWEEN '43.9826279150262' and '44.0088845173669'
+    and LONGITUDE BETWEEN '125.665544229113' and '125.708736272618'
+    ORDER BY UPDATETIME ASC
+  </select>
+
+  <!--按日期删除历史轨迹-->
+  <delete id="deleteByDate" parameterType="java.lang.String" >
+    delete from CAR_TRAJECTORY_INFOS
+    where UPDATETIME &lt;= #{updatetime}
+  </delete>
+</mapper>

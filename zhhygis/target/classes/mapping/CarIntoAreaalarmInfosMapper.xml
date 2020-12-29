@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.CarIntoAreaalarmInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.CarIntoAreaalarmInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aircode" property="aircode" jdbcType="VARCHAR" />
+    <result column="carnum" property="carnum" jdbcType="VARCHAR" />
+    <result column="intotime" property="intotime" jdbcType="VARCHAR" />
+    <result column="outtime" property="outtime" jdbcType="VARCHAR" />
+    <result column="regname" property="regname" jdbcType="VARCHAR" />
+    <result column="timecon" property="timecon" jdbcType="VARCHAR" />
+    <result column="isonline" property="isonline" jdbcType="VARCHAR" />
+    <result column="writetime" property="writetime" jdbcType="DATE" />
+    <result column="maxtime" property="maxtime" jdbcType="VARCHAR" />
+    <result column="intoarealogid" property="intoarealogid" jdbcType="INTEGER" />
+    <result column="driver" property="driver" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, aircode, carnum, intotime, outtime, regname, timecon, isonline, writetime, maxtime,
+    intoarealogid, driver
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from carintoareaalarminfos
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from carintoareaalarminfos
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.CarIntoAreaalarmInfos" >
+    insert into carintoareaalarminfos (id, aircode, carnum,
+    intotime, outtime, regname,
+    timecon, isonline, writetime,
+    maxtime, intoarealogid, driver
+    )
+    values (#{id,jdbcType=INTEGER}, #{aircode,jdbcType=VARCHAR}, #{carnum,jdbcType=VARCHAR},
+    #{intotime,jdbcType=VARCHAR}, #{outtime,jdbcType=VARCHAR}, #{regname,jdbcType=VARCHAR},
+    #{timecon,jdbcType=VARCHAR}, #{isonline,jdbcType=VARCHAR}, #{writetime,jdbcType=DATE},
+    #{maxtime,jdbcType=VARCHAR}, #{intoarealogid,jdbcType=INTEGER}, #{driver,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.CarIntoAreaalarmInfos" >
+    insert into carintoareaalarminfos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aircode != null" >
+        aircode,
+      </if>
+      <if test="carnum != null" >
+        carnum,
+      </if>
+      <if test="intotime != null" >
+        intotime,
+      </if>
+      <if test="outtime != null" >
+        outtime,
+      </if>
+      <if test="regname != null" >
+        regname,
+      </if>
+      <if test="timecon != null" >
+        timecon,
+      </if>
+      <if test="isonline != null" >
+        isonline,
+      </if>
+      <if test="writetime != null" >
+        writetime,
+      </if>
+      <if test="maxtime != null" >
+        maxtime,
+      </if>
+      <if test="intoarealogid != null" >
+        intoarealogid,
+      </if>
+      <if test="driver != null" >
+        driver,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aircode != null" >
+        #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="intotime != null" >
+        #{intotime,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        #{outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="timecon != null" >
+        #{timecon,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        #{writetime,jdbcType=DATE},
+      </if>
+      <if test="maxtime != null" >
+        #{maxtime,jdbcType=VARCHAR},
+      </if>
+      <if test="intoarealogid != null" >
+        #{intoarealogid,jdbcType=INTEGER},
+      </if>
+      <if test="driver != null" >
+        #{driver,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.CarIntoAreaalarmInfos" >
+    update carintoareaalarminfos
+    <set >
+      <if test="aircode != null" >
+        aircode = #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        carnum = #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="intotime != null" >
+        intotime = #{intotime,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        outtime = #{outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        regname = #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="timecon != null" >
+        timecon = #{timecon,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        isonline = #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        writetime = #{writetime,jdbcType=DATE},
+      </if>
+      <if test="maxtime != null" >
+        maxtime = #{maxtime,jdbcType=VARCHAR},
+      </if>
+      <if test="intoarealogid != null" >
+        intoarealogid = #{intoarealogid,jdbcType=INTEGER},
+      </if>
+      <if test="driver != null" >
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.CarIntoAreaalarmInfos" >
+    update carintoareaalarminfos
+    set aircode = #{aircode,jdbcType=VARCHAR},
+      carnum = #{carnum,jdbcType=VARCHAR},
+      intotime = #{intotime,jdbcType=VARCHAR},
+      outtime = #{outtime,jdbcType=VARCHAR},
+      regname = #{regname,jdbcType=VARCHAR},
+      timecon = #{timecon,jdbcType=VARCHAR},
+      isonline = #{isonline,jdbcType=VARCHAR},
+      writetime = #{writetime,jdbcType=DATE},
+      maxtime = #{maxtime,jdbcType=VARCHAR},
+      intoarealogid = #{intoarealogid,jdbcType=INTEGER},
+      driver = #{driver,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询条件-->
+  <sql id="CarIntoAreaalarmInfos_where">
+    <if test="carnum != null and carnum != ''">
+      and CARNUM = #{carnum}
+    </if>
+    <!--<if test="createtimeb != null and createtimee != null">
+      and intotime &gt;= #{createtimeb} and outtime &lt;= #{createtimee}
+    </if>-->
+    <if test="createtimeb != null and createtimeb != ''">
+      and intotime &gt;= #{createtimeb}
+    </if>
+    <if test="createtimee != null and createtimee != ''">
+      and outtime &lt;= #{createtimee}
+    </if>
+    <if test="isalarm != null">
+      and isonline = #{isalarm}
+    </if>
+    <if test="driver != null">
+      and driver LIKE #{pattern}
+    </if>
+    <if test="regname != null">
+      and regname LIKE #{pattern1}
+    </if>
+  </sql>
+  <!--条件查询超时报警-->
+  <select id="selectByParms" resultMap="BaseResultMap" >
+    <if test="driver != null">
+      <bind name="pattern" value="'%' + _parameter.driver + '%'" />
+    </if>
+    <if test="regname != null">
+      <bind name="pattern1" value="'%' + _parameter.regname + '%'" />
+    </if>
+    select
+    <include refid="Base_Column_List" />
+    from carTimeInfo
+    <trim prefix="where" prefixOverrides="and|or">
+      <include refid="CarIntoAreaalarmInfos_where"/>
+    </trim>
+  </select>
+</mapper>

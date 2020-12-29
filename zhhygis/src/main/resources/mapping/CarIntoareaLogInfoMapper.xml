@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.CarIntoareaLogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.CarIntoareaLogInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aircode" property="aircode" jdbcType="VARCHAR" />
+    <result column="carnum" property="carnum" jdbcType="VARCHAR" />
+    <result column="istrue" property="istrue" jdbcType="VARCHAR" />
+    <result column="regid" property="regid" jdbcType="VARCHAR" />
+    <result column="regname" property="regname" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="VARCHAR" />
+    <result column="y" property="y" jdbcType="VARCHAR" />
+    <result column="driver" property="driver" jdbcType="VARCHAR" />
+    <result column="isalarm" property="isalarm" jdbcType="VARCHAR" />
+    <result column="isonline" property="isonline" jdbcType="VARCHAR" />
+    <result column="writetime" property="writetime" jdbcType="DATE" />
+    <result column="timecon" property="timecon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, aircode, carnum, istrue, regid, regname, updatetime, x, y, driver, isalarm, isonline, 
+    writetime, timecon
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from carintoarealoginfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from carintoarealoginfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.CarIntoareaLogInfo" >
+    insert into carintoarealoginfo (id, aircode, carnum, 
+      istrue, regid, regname, 
+      updatetime, x, y, driver, 
+      isalarm, isonline, writetime, 
+      timecon)
+    values (#{id,jdbcType=INTEGER}, #{aircode,jdbcType=VARCHAR}, #{carnum,jdbcType=VARCHAR}, 
+      #{istrue,jdbcType=VARCHAR}, #{regid,jdbcType=VARCHAR}, #{regname,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, 
+      #{isalarm,jdbcType=VARCHAR}, #{isonline,jdbcType=VARCHAR}, #{writetime,jdbcType=DATE}, 
+      #{timecon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.CarIntoareaLogInfo" >
+    insert into carintoarealoginfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aircode != null" >
+        aircode,
+      </if>
+      <if test="carnum != null" >
+        carnum,
+      </if>
+      <if test="istrue != null" >
+        istrue,
+      </if>
+      <if test="regid != null" >
+        regid,
+      </if>
+      <if test="regname != null" >
+        regname,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="driver != null" >
+        driver,
+      </if>
+      <if test="isalarm != null" >
+        isalarm,
+      </if>
+      <if test="isonline != null" >
+        isonline,
+      </if>
+      <if test="writetime != null" >
+        writetime,
+      </if>
+      <if test="timecon != null" >
+        timecon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aircode != null" >
+        #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        #{istrue,jdbcType=VARCHAR},
+      </if>
+      <if test="regid != null" >
+        #{regid,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="isalarm != null" >
+        #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        #{writetime,jdbcType=DATE},
+      </if>
+      <if test="timecon != null" >
+        #{timecon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.CarIntoareaLogInfo" >
+    update carintoarealoginfo
+    <set >
+      <if test="aircode != null" >
+        aircode = #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        carnum = #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        istrue = #{istrue,jdbcType=VARCHAR},
+      </if>
+      <if test="regid != null" >
+        regid = #{regid,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        regname = #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="isalarm != null" >
+        isalarm = #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="isonline != null" >
+        isonline = #{isonline,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        writetime = #{writetime,jdbcType=DATE},
+      </if>
+      <if test="timecon != null" >
+        timecon = #{timecon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.CarIntoareaLogInfo" >
+    update carintoarealoginfo
+    set aircode = #{aircode,jdbcType=VARCHAR},
+      carnum = #{carnum,jdbcType=VARCHAR},
+      istrue = #{istrue,jdbcType=VARCHAR},
+      regid = #{regid,jdbcType=VARCHAR},
+      regname = #{regname,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR},
+      x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      isalarm = #{isalarm,jdbcType=VARCHAR},
+      isonline = #{isonline,jdbcType=VARCHAR},
+      writetime = #{writetime,jdbcType=DATE},
+      timecon = #{timecon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询条件-->
+  <sql id="carintoarealoginfo_where">
+    <if test="carnum != null">
+      and CARNUM = #{carnum}
+    </if>
+  <!--  <if test="createtimeb != null and createtimee != null">
+      and updatetime &gt;= #{createtimeb} and updatetime &lt;= #{createtimee}
+    </if>-->
+  <if test="createtimeb != null and createtimeb != ''">
+    and updatetime &gt;= #{createtimeb}
+  </if>
+  <if test="createtimee != null and createtimee != ''">
+    and updatetime &lt;= #{createtimee}
+  </if>
+    <if test="isalarm != null">
+      and isalarm = #{isalarm}
+    </if>
+    <if test="driver != null">
+      and driver LIKE #{pattern}
+    </if>
+    <if test="regname != null">
+      and regname LIKE #{pattern1}
+    </if>
+  </sql>
+  <!--条件查询进出区域报警-->
+  <select id="selectByParms" resultMap="BaseResultMap" >
+    <if test="driver != null">
+      <bind name="pattern" value="'%' + _parameter.driver + '%'" />
+    </if>
+    <if test="regname != null">
+      <bind name="pattern1" value="'%' + _parameter.regname + '%'" />
+    </if>
+    select
+    <include refid="Base_Column_List" />
+    from carintoarealoginfo
+    <trim prefix="where" prefixOverrides="and|or">
+      <include refid="carintoarealoginfo_where"/>
+    </trim>
+  </select>
+</mapper>

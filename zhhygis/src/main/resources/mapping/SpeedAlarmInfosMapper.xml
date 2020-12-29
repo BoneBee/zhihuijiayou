@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.SpeedAlarmInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.SpeedAlarmInfos" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SJSPEED" property="sjspeed" jdbcType="DOUBLE" />
+    <result column="LIMITSPEED" property="limitspeed" jdbcType="DOUBLE" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="VARCHAR" />
+    <result column="ISALARM" property="isalarm" jdbcType="VARCHAR" />
+    <result column="DRIVERID" property="driverid" jdbcType="VARCHAR" />
+    <result column="DRIVERNAME" property="drivername" jdbcType="VARCHAR" />
+    <result column="CARNUM" property="carnum" jdbcType="VARCHAR" />
+    <result column="X" property="x" jdbcType="VARCHAR" />
+    <result column="Y" property="y" jdbcType="VARCHAR" />
+    <result column="REGNAME" property="regname" jdbcType="VARCHAR" />
+    <result column="AIRCODE" property="aircode" jdbcType="VARCHAR" />
+    <result column="writetime" property="writetime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SJSPEED, LIMITSPEED, UPDATETIME, ISALARM, DRIVERID, DRIVERNAME, CARNUM, X, Y, 
+    REGNAME, AIRCODE, writetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SPEED_ALARM_INFOS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SPEED_ALARM_INFOS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.SpeedAlarmInfos" >
+    insert into SPEED_ALARM_INFOS (ID, SJSPEED, LIMITSPEED, 
+      UPDATETIME, ISALARM, DRIVERID, 
+      DRIVERNAME, CARNUM, X, 
+      Y, REGNAME, AIRCODE, 
+      writetime)
+    values (#{id,jdbcType=VARCHAR}, #{sjspeed,jdbcType=DOUBLE}, #{limitspeed,jdbcType=DOUBLE}, 
+      #{updatetime,jdbcType=VARCHAR}, #{isalarm,jdbcType=VARCHAR}, #{driverid,jdbcType=VARCHAR}, 
+      #{drivername,jdbcType=VARCHAR}, #{carnum,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR}, 
+      #{y,jdbcType=VARCHAR}, #{regname,jdbcType=VARCHAR}, #{aircode,jdbcType=VARCHAR}, 
+      #{writetime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.SpeedAlarmInfos" >
+    insert into SPEED_ALARM_INFOS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sjspeed != null" >
+        SJSPEED,
+      </if>
+      <if test="limitspeed != null" >
+        LIMITSPEED,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="isalarm != null" >
+        ISALARM,
+      </if>
+      <if test="driverid != null" >
+        DRIVERID,
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME,
+      </if>
+      <if test="carnum != null" >
+        CARNUM,
+      </if>
+      <if test="x != null" >
+        X,
+      </if>
+      <if test="y != null" >
+        Y,
+      </if>
+      <if test="regname != null" >
+        REGNAME,
+      </if>
+      <if test="aircode != null" >
+        AIRCODE,
+      </if>
+      <if test="writetime != null" >
+        writetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sjspeed != null" >
+        #{sjspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="limitspeed != null" >
+        #{limitspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isalarm != null" >
+        #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="aircode != null" >
+        #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        #{writetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.SpeedAlarmInfos" >
+    update SPEED_ALARM_INFOS
+    <set >
+      <if test="sjspeed != null" >
+        SJSPEED = #{sjspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="limitspeed != null" >
+        LIMITSPEED = #{limitspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isalarm != null" >
+        ISALARM = #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        DRIVERID = #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        CARNUM = #{carnum,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        X = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        Y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="regname != null" >
+        REGNAME = #{regname,jdbcType=VARCHAR},
+      </if>
+      <if test="aircode != null" >
+        AIRCODE = #{aircode,jdbcType=VARCHAR},
+      </if>
+      <if test="writetime != null" >
+        writetime = #{writetime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.SpeedAlarmInfos" >
+    update SPEED_ALARM_INFOS
+    set SJSPEED = #{sjspeed,jdbcType=DOUBLE},
+      LIMITSPEED = #{limitspeed,jdbcType=DOUBLE},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      ISALARM = #{isalarm,jdbcType=VARCHAR},
+      DRIVERID = #{driverid,jdbcType=VARCHAR},
+      DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      CARNUM = #{carnum,jdbcType=VARCHAR},
+      X = #{x,jdbcType=VARCHAR},
+      Y = #{y,jdbcType=VARCHAR},
+      REGNAME = #{regname,jdbcType=VARCHAR},
+      AIRCODE = #{aircode,jdbcType=VARCHAR},
+      writetime = #{writetime,jdbcType=DATE}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <!--查询条件-->
+  <sql id="speedAlarmInfos_where">
+    <if test="isonline != null and isonline != ''">
+     and isonline = #{isonline}
+    </if>
+    <if test="carnum != null and carnum != ''">
+      and CARNUM = #{carnum}
+    </if>
+   <!-- <if test="createtimeb != null and createtimee != null">
+      and UPDATETIME &gt;= #{createtimeb} and UPDATETIME &lt;= #{createtimee}
+    </if>-->
+    <if test="createtimeb != null and createtimeb != ''">
+      and UPDATETIME &gt;= #{createtimeb}
+    </if>
+    <if test="createtimee != null and createtimee != ''">
+      and UPDATETIME &lt;= #{createtimee}
+    </if>
+    <if test="isalarm != null and isalarm != ''">
+      and ISALARM = #{isalarm}
+    </if>
+    <if test="drivername != null and drivername != ''">
+      and DRIVERNAME LIKE #{pattern}
+    </if>
+  </sql>
+  <!--条件查询超速报警-->
+  <select id="selectByParms" resultMap="BaseResultMap" >
+    <if test="drivername != null">
+      <bind name="pattern" value="'%' + _parameter.drivername + '%'" />
+    </if>
+    select
+    <include refid="Base_Column_List" />
+    from SPEED_ALARM_INFOS
+    <trim prefix="where" prefixOverrides="and|or">
+      <include refid="speedAlarmInfos_where"/>
+    </trim>
+    order by UPDATETIME ASC
+  </select>
+</mapper>

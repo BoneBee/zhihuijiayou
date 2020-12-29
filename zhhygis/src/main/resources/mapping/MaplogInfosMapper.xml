@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.MaplogInfosMapper" >
+  
+  <select id="queryDatabase" parameterType="java.lang.String" resultType="java.lang.String" >
+    select databasename from parkbaseinfo where effective='0' and aircode=#{aircode}
+  </select>
+  
+  <select id="queryAllDatabase"  resultType="java.lang.String" >
+    select databasename from parkbaseinfo where effective='0'
+  </select>
+  
+  <select id="queryyjinfo" parameterType="java.util.Map" resultType="java.util.HashMap" >
+    select id,istrue,updatetime from carintoareainfo where effective='0' and aircode=#{aircode}
+    and regid=#{regid} and carnum=#{carnum}
+  </select>
+ 
+  <update id="updateyjinfo" parameterType="java.util.Map" >
+       UPDATE 
+            carintoareainfo
+       SET 
+           istrue=#{istrue},
+           updatetime=#{updatetime},
+           writetime=now()
+       WHERE 
+            id = #{id}
+    </update>
+    
+     <update id="updateyjinfoTemp" parameterType="java.util.Map" >
+       UPDATE 
+            carintoareainfo_tempoff
+       SET 
+           istrue=#{istrue},
+           updatetime=#{updatetime},
+           writetime=now()
+       WHERE 
+            id = #{id}
+    </update>
+    <!--新增汽车区域信息-->
+    <insert id="addyjinfo" parameterType="java.util.Map"> 
+		 INSERT INTO carintoareainfo
+		 	(
+			aircode,
+			carnum,
+			istrue,
+			regid,
+			regname,
+			effective,
+			updatetime,
+		    isonline,
+			writetime
+			) VALUES
+			<foreach  collection="list" item="map" index="index"  separator=",">
+
+				(#{map.aircode,jdbcType=VARCHAR}, #{map.carnum,jdbcType=VARCHAR},#{map.istrue,jdbcType=VARCHAR},
+	         #{map.regid,jdbcType=VARCHAR}, #{map.regname,jdbcType=VARCHAR}, 
+	         '0',#{map.updatetime,jdbcType=VARCHAR},#{map.isonline,jdbcType=VARCHAR},now() )
+
+			</foreach>
+			
+			 <!-- values (
+			#{aircode},
+			#{cph},
+			#{istrue},
+			#{regid},
+			#{regname},
+			'0',
+			now()
+			) -->
+	</insert>
+	<!--新增汽车进出区域信息-->
+	<insert id="addyjloginfo" parameterType="java.util.List"> 
+		 INSERT INTO carintoarealoginfo
+		 	(
+			aircode,
+			carnum,
+			istrue,
+			regid,
+			regname,
+			updatetime,
+			x,
+			y,
+			driver,
+			isalarm,
+			writetime,
+			timecon,
+			isonline
+			)  values
+		 <foreach  collection="list" item="map" index="index"  separator=",">
+			 (
+			 #{map.aircode,jdbcType=VARCHAR}, #{map.carnum,jdbcType=VARCHAR}, #{map.istrue,jdbcType=VARCHAR},
+	         #{map.regid,jdbcType=VARCHAR}, #{map.regname,jdbcType=VARCHAR}, #{map.updatetime,jdbcType=VARCHAR},
+	         #{map.x,jdbcType=VARCHAR},#{map.y,jdbcType=VARCHAR},#{map.driver,jdbcType=VARCHAR},
+	         #{map.isalarm,jdbcType=VARCHAR},now(),#{map.timecon,jdbcType=VARCHAR},#{map.isonline,jdbcType=VARCHAR}
+			  )
+		</foreach>
+	</insert>
+
+	<select id="queryyjlog" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select id,istrue,(select count(1) from carintoareaalarminfos
+		where intoarealogid=t.id
+		) armcount from carintoarealoginfo t where id=(select max(id) from carintoarealoginfo
+		where aircode=#{aircode} and regid=#{regid} and carnum=#{carnum}
+		and #{updatetime}>updatetime)
+	</select>
+	
+	<!--新增超高报警信息-->
+	<insert id="addheightAlarm" parameterType="java.util.List"> 
+		 INSERT INTO height_alarm_infos
+		 	(
+			aircode,
+			carnum,
+			regid,
+			regname,
+			updatetime,
+			x,
+			y,
+			driver,
+			limitHeight,
+			vehiHeight,
+			isalarm,
+		    isonline,
+			writetime
+			)  values
+		 <foreach  collection="list" item="map" index="index"  separator="，">
+			 (
+			 #{map.aircode,jdbcType=VARCHAR}, #{map.carnum,jdbcType=VARCHAR}, 
+	         #{map.regid,jdbcType=VARCHAR}, #{map.regname,jdbcType=VARCHAR}, #{map.updatetime,jdbcType=VARCHAR},
+	         #{map.x,jdbcType=VARCHAR},#{map.y,jdbcType=VARCHAR},#{map.driver,jdbcType=VARCHAR},
+	         #{map.limitHeight,jdbcType=VARCHAR},#{map.vehiHeight,jdbcType=VARCHAR},
+	         #{map.isalarm,jdbcType=VARCHAR},#{map.isonline,jdbcType=VARCHAR},now()
+			 )
+		 </foreach>
+	</insert>
+	<!--新增超速报警信息-->
+	<insert id="addspeedAlarm" parameterType="java.util.List"> 
+		 INSERT INTO SPEED_ALARM_INFOS
+		 	(
+			SJSPEED,
+			LIMITSPEED,
+			UPDATETIME,
+			ISALARM,
+			DRIVERID,
+			DRIVERNAME,
+			CARNUM,
+			X,
+			Y,
+			REGNAME,
+			AIRCODE,
+		    isonline,
+			writetime
+			)  values
+		 <foreach  collection="list" item="map" index="index" separator="，">
+			 (
+			 #{map.sjspeed,jdbcType=VARCHAR}, #{map.limitSpeed,jdbcType=VARCHAR},#{map.updatetime,jdbcType=VARCHAR},
+	         #{map.isalarm,jdbcType=VARCHAR}, '', #{map.driver,jdbcType=VARCHAR}, #{map.carnum,jdbcType=VARCHAR},
+	         #{map.x,jdbcType=VARCHAR},#{map.y,jdbcType=VARCHAR},#{map.regname,jdbcType=VARCHAR},
+	         #{map.aircode,jdbcType=VARCHAR},#{map.isonline,jdbcType=VARCHAR},now()
+			 )
+		</foreach>
+	</insert>
+	<!--新增轨迹日志信息-->
+	<insert id="addTrajcetory" parameterType="java.util.List"> 
+		 INSERT INTO CAR_TRAJECTORY_INFOS
+		 	(
+			CARNUM,
+			AIRPORTID,
+		    UPDATETIME,
+			LONGITUDE,
+			LATITUDE,
+			ANGLE,
+			ALARMSIGN,
+			DRIVERID,
+			DRIVERNAME,
+			isonline,
+			writetime
+			)  values
+		 <foreach  collection="list" item="map" index="index"  separator=",">
+			 (
+			 #{map.carnum,jdbcType=VARCHAR}, #{map.aircode,jdbcType=VARCHAR},#{map.updatetime,jdbcType=VARCHAR},
+	         #{map.x,jdbcType=VARCHAR},#{map.y,jdbcType=VARCHAR},#{map.angle,jdbcType=VARCHAR},#{map.alarmsign,jdbcType=VARCHAR},
+	         '',#{map.driver,jdbcType=VARCHAR},#{map.isonline,jdbcType=VARCHAR},now()
+			 )
+		</foreach>
+	</insert>
+	<!--新增超时报警信息-->
+	<insert id="addAreaAlarminfo" parameterType="java.util.List"> 
+		 INSERT INTO carintoareaalarminfos
+		 	(
+			aircode,
+			carnum,
+			intotime,
+			outtime,
+			regname,
+			timecon,
+			isonline,
+			writetime,
+			maxtime,
+			intoarealogid,
+			driver
+			)  values
+		 <foreach  collection="list" item="map" index="index"  separator=",">
+			 (
+			 #{map.aircode,jdbcType=VARCHAR},#{map.carnum,jdbcType=VARCHAR}, #{map.intotime,jdbcType=VARCHAR},
+	         #{map.outtime,jdbcType=VARCHAR},#{map.regname,jdbcType=VARCHAR}, #{map.timecon,jdbcType=VARCHAR},
+	         #{map.isonline,jdbcType=VARCHAR},now(),#{map.maxtime,jdbcType=VARCHAR},
+	         #{map.intoarealogid},#{map.driver,jdbcType=VARCHAR}
+			 )
+		</foreach>
+	</insert>
+	
+	<select id="getOfflinedata" parameterType="java.util.Map" resultType="java.util.HashMap" >
+    select * from CAR_TRAJECTORY_INFOS where AIRPORTID=#{aircode}
+    and isonline='0' and ( ischeck is null or ischeck ='0') order by carnum,updatetime
+  </select>
+  
+  <select id="queryyjinfoOffline" parameterType="java.util.Map" resultType="java.util.HashMap" >
+    select id,istrue,updatetime from carintoareainfo_tempoff where effective='0' and aircode=#{aircode}
+    and regid=#{regid} and carnum=#{carnum}
+  </select>
+  
+  <insert id="addtemplog" parameterType="java.util.Map"> 
+		 INSERT INTO carintoareainfo_tempoff(aircode,updatetime,carnum,istrue,regid,regname) 
+	select aircode,updatetime,carnum,istrue,regid,regname from  carintoarealoginfo where id = (
+	select max(id) from carintoarealoginfo where #{updatetime}>updatetime 
+	and aircode=#{aircode} and carnum=#{carnum} and regid=#{regid})
+	</insert>
+	
+	<delete id="removeTemp" parameterType="java.util.Map">
+		truncate table carintoareainfo_tempoff
+	</delete>
+	
+	<update id="updateTrajectory" parameterType="java.util.List">
+	　　<!-- update CAR_TRAJECTORY_INFOS set ischeck='1' 
+	   where id in 
+		 <foreach collection="list" index="index" item="item"  separator="," >
+		 <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+		 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+	        #{item.ID}
+    	</foreach> -->
+    	 <foreach collection="list" item="item" index= "index" open="" close="" separator =";">
+                update CAR_TRAJECTORY_INFOS
+               set ischeck='1' 
+                <where>
+                    id=#{item.ID}
+                </where>
+            </foreach> 
+	</update>
+	
+	<update id="updateTrajectory2" parameterType="java.util.List">
+		update CAR_TRAJECTORY_INFOS set ischeck='1' where ID in 
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >
+			#{item.ID}
+		</foreach>
+	</update>
+	
+	<!-- 11分钟以内数据，如果有实时判断，如果没有，不记录，如果11分钟，修改下方660，为秒为单位 -->
+	<select id="isSendAlarmLog" parameterType="java.util.Map" resultType="java.lang.Integer" >
+	select count(1)  from CAR_TRAJECTORY_INFOS where 
+	AIRPORTID=#{aircode}
+	and carnum=#{carnum} 
+	and UPDATETIME>= SUBDATE(now(),interval 660 second)
+  </select>
+  
+  <!-- 通过存储过程获取系列ID -->
+  <select id="querySequnce" parameterType="map" statementType="CALLABLE" >
+      {
+         call getSenquncenvalue(
+               #{sequncename,mode=IN,jdbcType=VARCHAR},
+               #{pcellname,mode=IN,jdbcType=VARCHAR},
+               #{sequncenvalue,mode=OUT,jdbcType=INTEGER}    
+         )
+      }
+  </select>
+
+	<!--查询汽车超时报警最近的进入区域时间-->
+	<select id="getCarOutTime" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT aircode,carnum,intotime,regname,isonline,maxtime,intoarealogid,driver FROM carintoareaalarminfos WHERE id =(
+		SELECT MAX(id) FROM carintoareaalarminfos
+		WHERE aircode = #{aircode} AND carnum = #{carnum} and regname = #{regname})
+	</select>
+    <!--超时报警进出区域时间入库-->
+	<insert id="insertCarOutTime" parameterType="java.util.List">
+		INSERT INTO carTimeInfo
+		(
+		aircode,
+		carnum,
+		intotime,
+		outtime,
+		regname,
+		timecon,
+		isonline,
+		writetime,
+		maxtime,
+		intoarealogid,
+		driver
+		)  values
+		<foreach  collection="list" item="map" index="index"  separator=",">
+			(
+			#{map.aircode,jdbcType=VARCHAR},#{map.carnum,jdbcType=VARCHAR}, #{map.intotime,jdbcType=VARCHAR},
+			#{map.outtime,jdbcType=VARCHAR},#{map.regname,jdbcType=VARCHAR}, #{map.timecon,jdbcType=VARCHAR},
+			#{map.isonline,jdbcType=VARCHAR},now(),#{map.maxtime,jdbcType=VARCHAR},
+			#{map.intoarealogid},#{map.driver,jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+    <!--查询当前进入时间是否已记录，已记录则不在记录-->
+	<select id="getMinOutTime" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM carTimeInfo WHERE intotime = #{intotime} AND carnum = #{carnum} AND aircode = #{aircode}
+	</select>
+
+</mapper>

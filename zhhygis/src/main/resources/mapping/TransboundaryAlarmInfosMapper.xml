@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncse.zhhygis.mapper.TransboundaryAlarmInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.ncse.zhhygis.entity.TransboundaryAlarmInfos" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CARTID" property="cartid" jdbcType="VARCHAR" />
+    <result column="AREAID" property="areaid" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="ISALARM" property="isalarm" jdbcType="VARCHAR" />
+    <result column="DRIVERID" property="driverid" jdbcType="VARCHAR" />
+    <result column="DRIVERNAME" property="drivername" jdbcType="VARCHAR" />
+    <result column="CARNUM" property="carnum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CARTID, AREAID, UPDATETIME, ISALARM, DRIVERID, DRIVERNAME, CARNUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRANSBOUNDARY_ALARM_INFOS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TRANSBOUNDARY_ALARM_INFOS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ncse.zhhygis.entity.TransboundaryAlarmInfos" >
+    insert into TRANSBOUNDARY_ALARM_INFOS (ID, CARTID, AREAID, 
+      UPDATETIME, ISALARM, DRIVERID,
+      DRIVERNAME, CARNUM)
+    values (#{id,jdbcType=VARCHAR}, #{cartid,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{isalarm,jdbcType=VARCHAR}, #{driverid,jdbcType=VARCHAR},
+      #{drivername,jdbcType=VARCHAR}, #{carnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncse.zhhygis.entity.TransboundaryAlarmInfos" >
+    insert into TRANSBOUNDARY_ALARM_INFOS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="cartid != null" >
+        CARTID,
+      </if>
+      <if test="areaid != null" >
+        AREAID,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="isalarm != null" >
+        ISALARM,
+      </if>
+      <if test="driverid != null" >
+        DRIVERID,
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME,
+      </if>
+      <if test="carnum != null" >
+        CARNUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartid != null" >
+        #{cartid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isalarm != null" >
+        #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        #{carnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncse.zhhygis.entity.TransboundaryAlarmInfos" >
+    update TRANSBOUNDARY_ALARM_INFOS
+    <set >
+      <if test="cartid != null" >
+        CARTID = #{cartid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        AREAID = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isalarm != null" >
+        ISALARM = #{isalarm,jdbcType=VARCHAR},
+      </if>
+      <if test="driverid != null" >
+        DRIVERID = #{driverid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="carnum != null" >
+        CARNUM = #{carnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncse.zhhygis.entity.TransboundaryAlarmInfos" >
+    update TRANSBOUNDARY_ALARM_INFOS
+    set CARTID = #{cartid,jdbcType=VARCHAR},
+      AREAID = #{areaid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      ISALARM = #{isalarm,jdbcType=VARCHAR},
+      DRIVERID = #{driverid,jdbcType=VARCHAR},
+      DRIVERNAME = #{drivername,jdbcType=VARCHAR},
+      CARNUM = #{carnum,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!--查询条件-->
+  <sql id="transboundaryAlarmInfos_where">
+    <if test="carnum != null">
+      and CARNUM = #{carnum}
+    </if>
+    <if test="updatetimeb != null and updatetimee != null">
+      and UPDATETIME &gt;= #{updatetimeb} and UPDATETIME &lt;= #{updatetimee}
+    </if>
+    <if test="isalarm != null">
+      and ISALARM = #{isalarm}
+    </if>
+    <if test="areaid != null">
+      and AREAID = #{areaid}
+    </if>
+    <if test="drivername != null">
+      and DRIVERNAME LIKE #{pattern}
+    </if>
+  </sql>
+  <!--条件查询越界报警-->
+  <select id="selectByParms" resultMap="BaseResultMap" >
+    <if test="drivername != null">
+      <bind name="pattern" value="'%' + _parameter.drivername + '%'" />
+    </if>
+    select
+    <include refid="Base_Column_List" />
+    from TRANSBOUNDARY_ALARM_INFOS
+    <trim prefix="where" prefixOverrides="and|or">
+      <include refid="transboundaryAlarmInfos_where"/>
+    </trim>
+  </select>
+</mapper>
